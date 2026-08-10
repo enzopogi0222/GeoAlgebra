@@ -1,4 +1,6 @@
 import '../models/topic.dart';
+import '../models/lesson.dart';
+
 
 class AlgebraViewModel {
   String get title => 'Algebra';
@@ -10,6 +12,14 @@ class AlgebraViewModel {
     Topic(
       title: 'Algebraic Expressions',
       description: 'Learn the basic concepts of algebraic expressions.',
+      lessons: [
+        Lesson(
+          title: 'Introduction to Algebraic Expressions',
+          overview: 'An introduction to algebraic expressions.',
+          explanation: 'This is temporary lesson content for testing the model.',
+          example: 'Example: 2x + 3 is an algebraic expression.',
+        ),
+      ],
     ),
     Topic(
       title: 'Operations on Algebraic Expressions',

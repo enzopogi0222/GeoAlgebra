@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../viewmodels/algebra_viewmodel.dart';
 import '../../widgets/topic_card.dart';
+import '../lesson/lesson_view.dart';
 
 class AlgebraView extends StatelessWidget {
   AlgebraView({super.key});
@@ -41,7 +42,15 @@ class AlgebraView extends StatelessWidget {
                 topic: topic,
                 icon: Icons.functions,
                 onTap: () {
-                  // Lesson navigation will be added later.
+                  if (topic.lessons.isNotEmpty) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            LessonView(lesson: topic.lessons.first),
+                      ),
+                    );
+                  }
                 },
               ),
             ),

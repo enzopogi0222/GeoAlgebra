@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../viewmodels/geometry_viewmodel.dart';
 import '../../widgets/topic_card.dart';
+import '../lesson/lesson_view.dart';
 
 class GeometryView extends StatelessWidget {
   GeometryView({super.key});
@@ -41,7 +42,15 @@ class GeometryView extends StatelessWidget {
                 topic: topic,
                 icon: Icons.change_history,
                 onTap: () {
-                  // Lesson navigation will be added later.
+                  if (topic.lessons.isNotEmpty) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            LessonView(lesson: topic.lessons.first),
+                      ),
+                    );
+                  }
                 },
               ),
             ),
