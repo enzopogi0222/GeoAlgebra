@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../viewmodels/geometry_viewmodel.dart';
+import '../../widgets/topic_card.dart';
 
 class GeometryView extends StatelessWidget {
   GeometryView({super.key});
@@ -36,32 +37,14 @@ class GeometryView extends StatelessWidget {
           const SizedBox(height: 15),
 
           ...viewModel.topics.map(
-                (topic) => Card(
-              margin: const EdgeInsets.only(bottom: 12),
-              child: ListTile(
-                leading: const Icon(Icons.change_history),
-
-                title: Text(
-                  topic.title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-
-                subtitle: Text(topic.description),
-
-
-                trailing: const Icon(
-                  Icons.arrow_forward_ios,
-                  size: 18,
-                ),
-
+                (topic) => TopicCard(
+                topic: topic,
+                icon: Icons.change_history,
                 onTap: () {
                   // Lesson navigation will be added later.
                 },
               ),
             ),
-          ),
         ],
       ),
     );
