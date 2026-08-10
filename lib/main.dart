@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'views/home/home_view.dart';
 
 void main() {
   runApp(const GeoAlgebraApp());
@@ -12,20 +13,7 @@ class GeoAlgebraApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'GeoAlgebra',
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('GeoAlgebra'),
-        ),
-        body: const Center(
-          child: Text(
-            'Welcome to GeoAlgebra',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
-      ),
+      home: HomeView(),
     );
   }
 }
