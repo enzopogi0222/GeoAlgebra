@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
-import 'views/home/home_view.dart';
+
+
 import 'core/theme/app_theme.dart';
 import 'core/routes/app_routes.dart';
+
+import 'views/home/home_view.dart';
+import 'views/algebra/algebra_view.dart';
+import 'views/geometry/geometry_view.dart';
 
 void main() {
   runApp(const GeoAlgebraApp());
@@ -23,6 +28,8 @@ class GeoAlgebraApp extends StatelessWidget {
 
       routes: {
         AppRoutes.home: (context) => HomeView(),
+        AppRoutes.algebra: (context) => AlgebraView(),
+        AppRoutes.geometry: (context) => GeometryView(),
       },
     );
   }
