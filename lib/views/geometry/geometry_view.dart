@@ -42,11 +42,14 @@ class GeometryView extends StatelessWidget {
                 leading: const Icon(Icons.change_history),
 
                 title: Text(
-                  topic,
+                  topic.title,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+
+                subtitle: Text(topic.description),
+
 
                 trailing: const Icon(
                   Icons.arrow_forward_ios,

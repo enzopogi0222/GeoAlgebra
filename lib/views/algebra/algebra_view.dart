@@ -42,11 +42,13 @@ class AlgebraView extends StatelessWidget {
                 leading: const Icon(Icons.functions),
 
                 title: Text(
-                  topic,
+                  topic.title,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                 ),
+
+                subtitle: Text(topic.description),
 
                 trailing: const Icon(
                   Icons.arrow_forward_ios,
