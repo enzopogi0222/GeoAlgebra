@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../../viewmodels/geometry_viewmodel.dart';
 import '../../widgets/topic_card.dart';
 import '../lesson/lesson_view.dart';
+import '../lesson/lesson_list_view.dart';
 
 class GeometryView extends StatelessWidget {
   GeometryView({super.key});
@@ -47,7 +48,7 @@ class GeometryView extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            LessonView(lesson: topic.lessons.first),
+                            LessonListView(topic: topic)
                       ),
                     );
                   }
