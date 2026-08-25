@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'core/database/db_seeder.dart';
 
 
 import 'core/theme/app_theme.dart';
@@ -8,7 +9,9 @@ import 'views/home/home_view.dart';
 import 'views/algebra/algebra_view.dart';
 import 'views/geometry/geometry_view.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await DbSeeder.seedIfEmpty();
   runApp(const GeoAlgebraApp());
 }
 

@@ -5,7 +5,7 @@ import '../../viewmodels/lesson_viewmodel.dart';
 class LessonView extends StatelessWidget {
   final Lesson lesson;
 
-  LessonView({
+  const LessonView({
     super.key,
     required this.lesson,
   });

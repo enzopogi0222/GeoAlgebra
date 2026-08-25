@@ -10,6 +10,7 @@ class AlgebraViewModel {
 
   List<Topic> get topics => [
     Topic(
+      subject: 'Algebra',
       title: 'Algebraic Expressions',
       description: 'Learn the basic concepts of algebraic expressions.',
       lessons: [
@@ -22,26 +23,32 @@ class AlgebraViewModel {
       ],
     ),
     Topic(
+      subject: 'Algebra',
       title: 'Operations on Algebraic Expressions',
       description: 'Learn how to perform operations on algebraic expressions.',
     ),
     Topic(
+      subject: 'Algebra',
       title: 'Special Products',
       description: 'Explore common special product patterns.',
     ),
     Topic(
+      subject: 'Algebra',
       title: 'Factorization',
       description: 'Learn different methods of factoring algebraic expressions.',
     ),
     Topic(
+      subject: 'Algebra',
       title: 'Rational Algebraic Expressions',
       description: 'Study operations involving rational algebraic expressions.',
     ),
     Topic(
+      subject: 'Algebra',
       title: 'Algebraic Equations',
       description: 'Learn how to solve algebraic equations.',
     ),
     Topic(
+      subject: 'Algebra',
       title: 'Sequences',
       description: 'Explore patterns and sequences.',
     ),
