@@ -9,10 +9,12 @@ class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._internal();
 
   static Database? _database;
+  static Future<Database>? _dbFuture;
 
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _database = await _initDatabase();
+    _dbFuture ??= _initDatabase();
+    _database = await _dbFuture;
     return _database!;
   }
 
@@ -22,8 +24,20 @@ class DatabaseHelper {
 
     return openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: _onCreate,
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < 2) {
+          // For development: drop and recreate to ensure schema is correct
+          await db.execute('DROP TABLE IF EXISTS progress');
+          await db.execute('DROP TABLE IF EXISTS quiz_scores');
+          await db.execute('DROP TABLE IF EXISTS practice_attempts');
+          await db.execute('DROP TABLE IF EXISTS practice_items');
+          await db.execute('DROP TABLE IF EXISTS lessons');
+          await db.execute('DROP TABLE IF EXISTS topics');
+          await _onCreate(db, newVersion);
+        }
+      },
     );
   }
 
@@ -31,6 +45,7 @@ class DatabaseHelper {
     await db.execute('''
       CREATE TABLE topics (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
+        term INTEGER NOT NULL,
         subject TEXT NOT NULL,
         title TEXT NOT NULL,
         description TEXT NOT NULL
@@ -99,7 +114,12 @@ class DatabaseHelper {
 
   Future<List<Topic>> getTopicsBySubject(String subject) async {
     final db = await database;
-    final rows = await db.query('topics', where: 'subject = ?', whereArgs: [subject]);
+    final rows = await db.query(
+      'topics',
+      where: 'subject = ?',
+      whereArgs: [subject],
+      orderBy: 'term ASC, id ASC',
+    );
 
     final List<Topic> topics = [];
     for (final row in rows) {
@@ -107,6 +127,33 @@ class DatabaseHelper {
       topics.add(Topic.fromMap(row, lessons: lessons));
     }
     return topics;
+  }
+
+  Future<List<Topic>> getTopicsBySubjectAndTerm(String subject, int term) async {
+    final db = await database;
+    final rows = await db.query('topics',
+        where: 'subject = ? AND term = ?',
+        whereArgs: [subject, term],
+    );
+
+    final List<Topic> topics = [];
+    for (final row in rows) {
+      final lessons = await getLessonsByTopic(row['id'] as int);
+      topics.add(Topic.fromMap(row, lessons: lessons));
+    }
+    return topics;
+  }
+
+  Future<List<int>> getTermsBySubject(String subject) async {
+    final db = await database;
+    final rows = await db.query(
+      'topics',
+      columns: ['DISTINCT term'],
+      where: 'subject = ?',
+      whereArgs: [subject],
+      orderBy: 'term ASC',
+    );
+    return rows.map((r) => r['term'] as int).toList();
   }
 
   // ---------- Lessons ----------

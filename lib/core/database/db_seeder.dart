@@ -1,5 +1,4 @@
 import '../../models/topic.dart';
-import '../../models/lesson.dart';
 import 'database_helper.dart';
 
 class DbSeeder {
@@ -8,88 +7,131 @@ class DbSeeder {
     final existing = await db.getTopicsBySubject('Algebra');
     if (existing.isNotEmpty) return; // already seeded
 
-    // Algebra topics (from algebra_viewmodel.dart)
-    final algebraTopics = [
+    final topics = [
+      // ===== TERM 1 =====
       Topic(
+        term: 1,
         subject: 'Algebra',
         title: 'Algebraic Expressions',
-        description: 'Learn the basic concepts of algebraic expressions.',
+        description: 'Model real-life situations using algebraic expressions.',
       ),
       Topic(
+        term: 1,
         subject: 'Algebra',
         title: 'Operations on Algebraic Expressions',
-        description: 'Learn how to perform operations on algebraic expressions.',
+        description:
+        'Add, subtract, multiply, and divide monomials, binomials, and multinomials.',
       ),
       Topic(
+        term: 1,
         subject: 'Algebra',
         title: 'Special Products',
-        description: 'Explore common special product patterns.',
+        description: 'Use special product patterns to multiply binomials.',
       ),
       Topic(
+        term: 1,
         subject: 'Algebra',
-        title: 'Factorization',
-        description: 'Learn different methods of factoring algebraic expressions.',
+        title: 'Factorization of Polynomials',
+        description:
+        'Completely factor polynomials with common monomial factors, difference of two '
+            'squares, and quadratic trinomials.',
       ),
       Topic(
+        term: 1,
         subject: 'Algebra',
-        title: 'Rational Algebraic Expressions',
-        description: 'Study operations involving rational algebraic expressions.',
+        title: 'Rational Algebraic Expressions and Equations',
+        description:
+        'Simplify, operate with, and solve equations involving rational algebraic '
+            'expressions.',
       ),
       Topic(
-        subject: 'Algebra',
-        title: 'Algebraic Equations',
-        description: 'Learn how to solve algebraic equations.',
-      ),
-      Topic(
+        term: 1,
         subject: 'Algebra',
         title: 'Sequences',
-        description: 'Explore patterns and sequences.',
+        description: 'Formulate the rule for finding the next term in a sequence.',
       ),
-    ];
-
-    // Geometry topics (from geometry_viewmodel.dart)
-    final geometryTopics = [
       Topic(
+        term: 1,
         subject: 'Geometry',
         title: 'Cartesian Coordinate Plane',
-        description: 'Learn about points and locations on the coordinate plane.',
+        description: 'Illustrate and describe the Cartesian coordinate plane, and plot points.',
       ),
       Topic(
+        term: 1,
         subject: 'Geometry',
         title: 'Distance and Midpoint',
-        description: 'Learn how to determine distance and midpoint.',
+        description:
+        'Solve problems involving distance between two points and the midpoint of a line '
+            'segment.',
       ),
+
+      // ===== TERM 2 =====
       Topic(
+        term: 2,
         subject: 'Geometry',
-        title: 'Volumes of Geometric Solids',
-        description: 'Study volume concepts for geometric solids.',
+        title: 'Volume of Pyramids, Cones, and Spheres',
+        description: 'Find and solve problems involving the volume of pyramids, cones, and spheres.',
       ),
       Topic(
+        term: 2,
         subject: 'Geometry',
         title: 'Pythagorean Theorem',
-        description: 'Explore the relationship between the sides of a right triangle.',
+        description:
+        'Apply the Pythagorean theorem to find a missing side, and its converse to classify '
+            'triangles.',
       ),
       Topic(
+        term: 2,
         subject: 'Geometry',
         title: 'Triangle Inequality Theorems',
-        description: 'Learn about relationships between the sides of triangles.',
+        description: 'Apply triangle inequality theorems to establish results for angles and sides.',
+      ),
+      Topic(
+        term: 2,
+        subject: 'Algebra',
+        title: 'Financial Problems',
+        description:
+        'Solve problems involving earning money, profit and loss, best buys, and buying on terms.',
+      ),
+      Topic(
+        term: 2,
+        subject: 'Algebra',
+        title: 'Linear Equations in One Variable',
+        description: 'Solve linear equations and related number, geometry, and money problems.',
+      ),
+      Topic(
+        term: 2,
+        subject: 'Algebra',
+        title: 'Linear Inequalities in One Variable',
+        description: 'Solve and graph linear inequalities in one variable on a number line.',
+      ),
+      Topic(
+        term: 2,
+        subject: 'Algebra',
+        title: 'Linear Equations in Two Variables',
+        description:
+        'Determine the slope and intercepts of a line, and find and graph its equation.',
+      ),
+
+      // ===== TERM 3 =====
+      Topic(
+        term: 3,
+        subject: 'Algebra',
+        title: 'Systems of Linear Equations',
+        description:
+        'Define, classify, and solve systems of linear equations in two variables graphically '
+            'and algebraically.',
+      ),
+      Topic(
+        term: 3,
+        subject: 'Algebra',
+        title: 'Linear Inequalities in Two Variables',
+        description: 'Recognize and solve problems involving linear inequalities in two variables.',
       ),
     ];
 
-    for (final topic in [...algebraTopics, ...geometryTopics]) {
+    for (final topic in topics) {
       await db.insertTopic(topic);
     }
-
-    // Seed the one existing lesson (from algebra_viewmodel.dart)
-    final allAlgebra = await db.getTopicsBySubject('Algebra');
-    final exprTopic = allAlgebra.firstWhere((t) => t.title == 'Algebraic Expressions');
-
-    await db.insertLesson(Lesson(
-      topicId: exprTopic.id,
-      title: 'Introduction to Algebraic Expressions',
-      overview: 'An introduction to algebraic expressions.',
-      explanation: 'This is temporary lesson content for testing the model.',
-      example: 'Example: 2x + 3 is an algebraic expression.',
-    ));
   }
 }

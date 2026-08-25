@@ -9,9 +9,14 @@ import 'views/home/home_view.dart';
 import 'views/algebra/algebra_view.dart';
 import 'views/geometry/geometry_view.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await DbSeeder.seedIfEmpty();
+  try {
+    await DbSeeder.seedIfEmpty();
+  } catch (e) {
+    // Log error but allow app to start
+    print('Error during database initialization: $e');
+  }
   runApp(const GeoAlgebraApp());
 }
 
