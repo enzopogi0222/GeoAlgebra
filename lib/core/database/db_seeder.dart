@@ -155,7 +155,7 @@ class DbSeeder {
     try {
       final topic = await topicByTitle(db, 'Algebra', 'Operations on Algebraic Expressions');
       if (topic.id != null) {
-        await OperationsDistributivePropertyLesson.seed(db);
+        await OperationsOnAlgebraicExpressionsLessons.seed(db);
       }
     } catch (e) {
       // Ignore if topic not found yet
