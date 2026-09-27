@@ -157,12 +157,12 @@ class _LessonViewState extends State<LessonView> {
 
   Widget _buildFormattedContent(BuildContext context, String content) {
     final colorScheme = Theme.of(context).colorScheme;
-    final blocks = content.split('\n\n').where((b) => b.trim().isNotEmpty).toList();
+    final sections = content.split('\n\n').where((s) => s.trim().isNotEmpty).toList();
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
-      children: blocks.map((block) {
-        final trimmed = block.trim();
+      children: sections.map((section) {
+        final trimmed = section.trim();
 
         // Styled Example card
         if (trimmed.startsWith('Example')) {
@@ -188,8 +188,11 @@ class _LessonViewState extends State<LessonView> {
           );
         }
 
-        // Vocabulary or bullet list block
-        if (trimmed.contains('•') || trimmed.startsWith('Key vocabulary:')) {
+        // Vocabulary, bullet list, or numbered step block
+        if (trimmed.contains('•') ||
+            trimmed.startsWith('Key vocabulary:') ||
+            RegExp(r'^\d+\.').hasMatch(trimmed) ||
+            RegExp(r'^Step\s+\d+:', caseSensitive: false).hasMatch(trimmed)) {
           return Container(
             margin: const EdgeInsets.only(bottom: 16),
             width: double.infinity,

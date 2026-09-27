@@ -2,6 +2,7 @@ import '../../models/topic.dart';
 import 'database_helper.dart';
 import 'seed_data/seed_helpers.dart';
 import 'seed_data/term1/algebraic_expression.dart';
+import 'seed_data/term1/operations_on_algebraic_expressions.dart';
 
 class DbSeeder {
   static Future<void> seedIfEmpty() async {
@@ -146,6 +147,15 @@ class DbSeeder {
       final topic = await topicByTitle(db, 'Algebra', 'Algebraic Expressions');
       if (topic.id != null) {
         await AlgebraicExpressionsModelingLesson.seed(db);
+      }
+    } catch (e) {
+      // Ignore if topic not found yet
+    }
+
+    try {
+      final topic = await topicByTitle(db, 'Algebra', 'Operations on Algebraic Expressions');
+      if (topic.id != null) {
+        await OperationsDistributivePropertyLesson.seed(db);
       }
     } catch (e) {
       // Ignore if topic not found yet
