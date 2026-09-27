@@ -187,6 +187,11 @@ class DatabaseHelper {
     return rows.map((row) => Lesson.fromMap(row)).toList();
   }
 
+  Future<void> deleteLessonsByTopic(int topicId) async {
+    final db = await database;
+    await db.delete('lessons', where: 'topicId = ?', whereArgs: [topicId]);
+  }
+
   // ---------- Progress ----------
 
   Future<void> markLessonCompleted(int lessonId) async {

@@ -5,9 +5,11 @@ import '../seed_helpers.dart';
 class AlgebraicExpressionsModelingLesson {
   static Future<void> seed(DatabaseHelper db) async {
     final t = await topicByTitle(db, 'Algebra', 'Algebraic Expressions');
+    await db.deleteLessonsByTopic(t.id!);
+
     await db.insertLesson(Lesson(
       topicId: t.id,
-      title: 'Modeling Real-Life Situations with Algebraic Expressions',
+      title: 'Algebraic Expressions',
       overview:
       'Learn how to translate real-life situations and word phrases into algebraic expressions '
           'using variables, constants, and operations.',
