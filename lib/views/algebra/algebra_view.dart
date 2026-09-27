@@ -4,6 +4,7 @@ import '../../viewmodels/algebra_viewmodel.dart';
 import '../../widgets/topic_card.dart';
 import '../../widgets/term_header.dart';
 import '../lesson/lesson_list_view.dart';
+import '../lesson/lesson_view.dart';
 
 class AlgebraView extends StatelessWidget {
   AlgebraView({super.key});
@@ -52,7 +53,14 @@ class AlgebraView extends StatelessWidget {
                     topic: topic,
                     icon: Icons.functions,
                     onTap: () {
-                      if (topic.lessons.isNotEmpty) {
+                      if (topic.lessons.length == 1) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => LessonView(lesson: topic.lessons.first),
+                          ),
+                        );
+                      } else {
                         Navigator.push(
                           context,
                           MaterialPageRoute(

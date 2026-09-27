@@ -160,6 +160,24 @@ class DatabaseHelper {
 
   Future<int> insertLesson(Lesson lesson) async {
     final db = await database;
+    final existing = await db.query(
+      'lessons',
+      where: 'topicId = ? AND title = ?',
+      whereArgs: [lesson.topicId, lesson.title],
+    );
+
+    if (existing.isNotEmpty) {
+      final id = existing.first['id'] as int;
+      final map = lesson.toMap()..['id'] = id;
+      await db.update(
+        'lessons',
+        map,
+        where: 'id = ?',
+        whereArgs: [id],
+      );
+      return id;
+    }
+
     return db.insert('lessons', lesson.toMap()..remove('id'));
   }
 
