@@ -192,7 +192,7 @@ class _LessonViewState extends State<LessonView> {
         if (trimmed.contains('•') ||
             trimmed.startsWith('Key vocabulary:') ||
             RegExp(r'^\d+\.').hasMatch(trimmed) ||
-            RegExp(r'^Step\s+\d+:', caseSensitive: false).hasMatch(trimmed)) {
+            RegExp(r'^Step\s+\d+', caseSensitive: false).hasMatch(trimmed)) {
           return Container(
             margin: const EdgeInsets.only(bottom: 16),
             width: double.infinity,
