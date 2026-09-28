@@ -1,6 +1,6 @@
+import 'package:flutter/foundation.dart';
 import '../../models/topic.dart';
 import 'database_helper.dart';
-import 'seed_data/seed_helpers.dart';
 import 'seed_data/term1/algebraic_expression.dart';
 import 'seed_data/term1/operations_on_algebraic_expressions.dart';
 import 'seed_data/term1/special_products.dart';
@@ -140,43 +140,23 @@ class DbSeeder {
       }
     }
 
-    // Seed lesson contents if not already seeded
     await _seedLessons(db);
   }
 
-  static Future<void> _seedLessons(DatabaseHelper db) async {
-    try {
-      final topic = await topicByTitle(db, 'Algebra', 'Algebraic Expressions');
-      if (topic.id != null) {
-        await AlgebraicExpressionsModelingLesson.seed(db);
-      }
-    } catch (e) {
-      // Ignore if topic not found yet
-    }
+  static final List<Future<void> Function(DatabaseHelper)> _lessonSeeders = [
+    AlgebraicExpressionsModelingLesson.seed,
+    OperationsOnAlgebraicExpressionsLessons.seed,
+    SpecialProductsLessons.seed,
+    FactorizationOfPolynomialsLessons.seed,
+  ];
 
-    try {
-      final topic = await topicByTitle(db, 'Algebra', 'Operations on Algebraic Expressions');
-      if (topic.id != null) {
-        await OperationsOnAlgebraicExpressionsLessons.seed(db);
+  static Future<void> _seedLessons(DatabaseHelper db) async {
+    for (final seed in _lessonSeeders) {
+      try {
+        await seed(db);
+      } catch (e) {
+        debugPrint('Lesson seeding skipped: $e');
       }
-    } catch (e) {
-      // Ignore if topic not found yet
-    }
-    try {
-      final topic = await topicByTitle(db, 'Algebra', 'Special Products');
-      if (topic.id != null) {
-        await SpecialProductsLessons.seed(db);
-      }
-    } catch (e) {
-      // Ignore if topic not found yet
-    }
-    try {
-    final topic = await topicByTitle(db, 'Algebra', 'Factorization of Polynomials');
-    if (topic.id != null) {
-      await FactorizationOfPolynomialsLessons.seed(db);
-    }
-  } catch (e) {
-      // Ignore if topic not found yet
     }
   }
 }
