@@ -5,9 +5,9 @@ import 'core/database/db_seeder.dart';
 import 'core/theme/app_theme.dart';
 import 'core/routes/app_routes.dart';
 
+import 'views/subject/subject_view.dart';
 import 'views/home/home_view.dart';
-import 'views/algebra/algebra_view.dart';
-import 'views/geometry/geometry_view.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -36,8 +36,10 @@ class GeoAlgebraApp extends StatelessWidget {
 
       routes: {
         AppRoutes.home: (context) => HomeView(),
-        AppRoutes.algebra: (context) => AlgebraView(),
-        AppRoutes.geometry: (context) => GeometryView(),
+        AppRoutes.algebra: (context) =>
+        const SubjectView(subject: 'Algebra', icon: Icons.functions),
+        AppRoutes.geometry: (context) =>
+        const SubjectView(subject: 'Geometry', icon: Icons.change_history),
       },
     );
   }
