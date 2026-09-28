@@ -3,6 +3,7 @@ import 'database_helper.dart';
 import 'seed_data/seed_helpers.dart';
 import 'seed_data/term1/algebraic_expression.dart';
 import 'seed_data/term1/operations_on_algebraic_expressions.dart';
+import 'seed_data/term1/special_products.dart';
 
 class DbSeeder {
   static Future<void> seedIfEmpty() async {
@@ -156,6 +157,14 @@ class DbSeeder {
       final topic = await topicByTitle(db, 'Algebra', 'Operations on Algebraic Expressions');
       if (topic.id != null) {
         await OperationsOnAlgebraicExpressionsLessons.seed(db);
+      }
+    } catch (e) {
+      // Ignore if topic not found yet
+    }
+    try {
+      final topic = await topicByTitle(db, 'Algebra', 'Special Products');
+      if (topic.id != null) {
+        await SpecialProductsLessons.seed(db);
       }
     } catch (e) {
       // Ignore if topic not found yet
