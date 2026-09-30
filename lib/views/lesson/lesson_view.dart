@@ -188,11 +188,56 @@ class _LessonViewState extends State<LessonView> {
           );
         }
 
-        // Vocabulary, bullet list, or numbered step block
+        // Numbered step block: "Step N" (with optional parenthetical) gets its
+        // own bold heading line, with the rest of the sentence below it.
+        final stepMatch =
+            RegExp(r'^(Step\s+\d+(?:\s*\([^)]*\))?):\s*(.*)$', dotAll: true)
+                .firstMatch(trimmed);
+        if (stepMatch != null) {
+          final label = stepMatch.group(1)!;
+          final rest = stepMatch.group(2)!;
+          return Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: colorScheme.primaryContainer.withValues(alpha: 0.2),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: colorScheme.primary.withValues(alpha: 0.2),
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  label,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: colorScheme.primary,
+                  ),
+                ),
+                if (rest.isNotEmpty) ...[
+                  const SizedBox(height: 6),
+                  Text(
+                    rest,
+                    style: TextStyle(
+                      fontSize: 15,
+                      height: 1.5,
+                      color: colorScheme.onSurface,
+                    ),
+                  ),
+                ],
+              ],
+            ),
+          );
+        }
+
+        // Vocabulary or bullet list block
         if (trimmed.contains('•') ||
             trimmed.startsWith('Key vocabulary:') ||
-            RegExp(r'^\d+\.').hasMatch(trimmed) ||
-            RegExp(r'^Step\s+\d+', caseSensitive: false).hasMatch(trimmed)) {
+            RegExp(r'^\d+\.').hasMatch(trimmed)) {
           return Container(
             margin: const EdgeInsets.only(bottom: 16),
             width: double.infinity,
