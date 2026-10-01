@@ -3,44 +3,24 @@ import '../../seed_helpers.dart';
 const cubeOfBinomialLesson = LessonSeedData(
   title: 'Cube of a Binomial',
   overview:
-      'Cube a binomial directly using a four-term pattern built from cubes and products of the terms.',
+  'Find the cube of a binomial directly using a 4-term expansion pattern, instead of '
+      'multiplying the binomial by itself three times.',
   explanation:
-      'Cubing a binomial means multiplying it by itself 3 times: (a ± b)³. The resulting polynomial '
-      'is a four-term polynomial that follows these patterns:\n\n'
-      '   (a + b)³ = a³ + 3a²b + 3ab² + b³\n\n'
-      '   (a - b)³ = a³ - 3a²b + 3ab² - b³\n\n'
-      'The four terms are formed as follows:\n\n'
-      '• 1. The cube of the first term (a³).\n\n'
-      '• 2. Three times the square of the first term multiplied by the second term (3a²b).\n\n'
-      '• 3. Three times the first term multiplied by the square of the second term (3ab²).\n\n'
-      '• 4. The cube of the second term (b³).\n\n'
-      'Notice that for (a - b)³, the signs alternate: +, −, +, −.',
+  'Pattern: (a + b)³ = a³ + 3a²b + 3ab² + b³, and (a - b)³ = a³ - 3a²b + 3ab² - b³ (signs '
+      'alternate: +, -, +, -). Build each term: cube the first term; 3× the square of the '
+      'first term times the second; 3× the first term times the square of the second; cube '
+      'the second term.',
   example:
-      'Example 1 (Sum): Cube (x + 2).\n\n'
-      'Step 1: Cube the first term: x³ = x³.\n\n'
-      'Step 2: 3 × (first)² × (second): 3(x²)(2) = 6x².\n\n'
-      'Step 3: 3 × (first) × (second)²: 3(x)(2²) = 3(x)(4) = 12x.\n\n'
-      'Step 4: Cube the second term: 2³ = 8.\n\n'
+  'Example 1 (Sum): Cube (x + 2).\n\n'
+      'Step 1: x³, 3(x²)(2) = 6x², 3(x)(2²) = 12x, 2³ = 8.\n\n'
       'Answer: (x + 2)³ = x³ + 6x² + 12x + 8\n\n\n'
 
-      'Example 2 (Difference): Cube (y - 3).\n\n'
-      'Step 1: Cube the first term: y³.\n\n'
-      'Step 2: 3 × (first)² × (second): 3(y²)(-3) = -9y².\n\n'
-      'Step 3: 3 × (first) × (second)²: 3(y)(-3)² = 3(y)(9) = 27y.\n\n'
-      'Step 4: Cube the second term: (-3)³ = -27.\n\n'
-      'Answer: (y - 3)³ = y³ - 9y² + 27y - 27\n\n\n'
+      'Example 2 (Difference): Cube (2y - 1).\n\n'
+      'Step 1: (2y)³ = 8y³, 3(2y)²(1) = 12y², 3(2y)(1²) = 6y, 1³ = 1.\n\n'
+      'Step 2: Apply alternating signs for a difference.\n\n'
+      'Answer: (2y - 1)³ = 8y³ - 12y² + 6y - 1\n\n\n'
 
-      'Example 3 (Coefficients): Cube (2a + 3b).\n\n'
-      'Step 1: Cube the first term: (2a)³ = 8a³.\n\n'
-      'Step 2: 3(2a)²(3b) = 3(4a²)(3b) = 36a²b.\n\n'
-      'Step 3: 3(2a)(3b)² = 3(2a)(9b²) = 54ab².\n\n'
-      'Step 4: Cube the second term: (3b)³ = 27b³.\n\n'
-      'Answer: (2a + 3b)³ = 8a³ + 36a²b + 54ab² + 27b³\n\n\n'
-
-      'Example 4 (Negative first term): Cube (-x + 4).\n\n'
-      'Step 1: Cube the first term: (-x)³ = -x³.\n\n'
-      'Step 2: 3(-x)²(4) = 3(x²)(4) = 12x².\n\n'
-      'Step 3: 3(-x)(4²) = 3(-x)(16) = -48x.\n\n'
-      'Step 4: Cube the second term: 4³ = 64.\n\n'
-      'Answer: (-x + 4)³ = -x³ + 12x² - 48x + 64',
+      'Example 3 (Two variables): Cube (3x + 4y).\n\n'
+      'Step 1: (3x)³ = 27x³, 3(3x)²(4y) = 108x²y, 3(3x)(4y)² = 144xy², (4y)³ = 64y³.\n\n'
+      'Answer: (3x + 4y)³ = 27x³ + 108x²y + 144xy² + 64y³',
 );
