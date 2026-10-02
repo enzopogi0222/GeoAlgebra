@@ -76,6 +76,19 @@ class DatabaseHelper {
     ''');
 
     await db.execute('''
+      CREATE TABLE lessons (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        topicId INTEGER NOT NULL,
+        title TEXT NOT NULL,
+        overview TEXT NOT NULL,
+        explanation TEXT NOT NULL,
+        example TEXT NOT NULL,
+        diagramJson TEXT,
+        FOREIGN KEY (topicId) REFERENCES topics (id) ON DELETE CASCADE
+    )
+      ''');
+
+    await db.execute('''
       CREATE TABLE practice_attempts (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         practiceItemId INTEGER NOT NULL,

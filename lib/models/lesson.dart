@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class Lesson {
   final int? id;
   final int? topicId;
@@ -5,6 +7,7 @@ class Lesson {
   final String overview;
   final String explanation;
   final String example;
+  final LessonDiagram? diagram;
 
   Lesson({
     this.id,
@@ -13,6 +16,7 @@ class Lesson {
     required this.overview,
     required this.explanation,
     required this.example,
+    this.diagram,
   });
 
   Map<String, dynamic> toMap() {
@@ -23,6 +27,7 @@ class Lesson {
       'overview': overview,
       'explanation': explanation,
       'example': example,
+      'diagramJson': diagram == null ? null : jsonEncode(diagram!.toJson()),
     };
   }
 
@@ -34,6 +39,27 @@ class Lesson {
       overview: map['overview'] as String,
       explanation: map['explanation'] as String,
       example: map['example'] as String,
+      diagram: map['diagramJson'] == null
+          ? null
+          : LessonDiagram.fromJson(jsonDecode(map['diagramJson'] as String)),
     );
   }
 }
+
+class LessonDiagram {
+  final DiagramType type;
+  final Map<String, dynamic> data;
+
+  const LessonDiagram({required this.type, required this.data});
+
+  Map<String, dynamic> toJson() => {'type': type.name, 'data': data};
+
+  factory LessonDiagram.fromJson(Map<String, dynamic> json) {
+    return LessonDiagram(
+      type: DiagramType.values.byName(json['type'] as String),
+      data: Map<String, dynamic>.from(json['data'] as Map),
+    );
+  }
+}
+
+enum DiagramType { algebraTiles, areaModel, coordinatePlane }
