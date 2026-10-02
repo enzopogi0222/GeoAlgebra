@@ -7,32 +7,34 @@ class LessonSeedData {
   final String overview;
   final String explanation;
   final String example;
+  final LessonDiagram? diagram;
 
   const LessonSeedData({
     required this.title,
     required this.overview,
     required this.explanation,
     required this.example,
+    this.diagram,
   });
 }
 
 Future<Topic> topicByTitle(
-  DatabaseHelper db,
-  String subject,
-  String title, {
-  int term = 1,
-}) async {
+    DatabaseHelper db,
+    String subject,
+    String title, {
+      int term = 1,
+    }) async {
   final list = await db.getTopicsBySubjectAndTerm(subject, term);
   return list.firstWhere((t) => t.title == title);
 }
 
 Future<void> seedTopicLessons(
-  DatabaseHelper db, {
-  required String subject,
-  required String topicTitle,
-  required List<LessonSeedData> lessons,
-  int term = 1,
-}) async {
+    DatabaseHelper db, {
+      required String subject,
+      required String topicTitle,
+      required List<LessonSeedData> lessons,
+      int term = 1,
+    }) async {
   final topic = await topicByTitle(db, subject, topicTitle, term: term);
   await db.deleteLessonsByTopic(topic.id!);
 
@@ -43,6 +45,7 @@ Future<void> seedTopicLessons(
       overview: data.overview,
       explanation: data.explanation,
       example: data.example,
+      diagram: data.diagram,
     ));
   }
 }
