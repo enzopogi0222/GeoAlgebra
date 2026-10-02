@@ -9,12 +9,12 @@ class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._internal();
 
   static Database? _database;
-  static Future<Database>? _dbFuture;
+  static Future<Database>? _initFuture;
 
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _dbFuture ??= _initDatabase();
-    _database = await _dbFuture;
+    _initFuture ??= _initDatabase();
+    _database = await _initFuture;
     return _database!;
   }
 
@@ -24,10 +24,10 @@ class DatabaseHelper {
 
     return openDatabase(
       path,
-      version: 2,
+      version: 3,
       onCreate: _onCreate,
       onUpgrade: (db, oldVersion, newVersion) async {
-        if (oldVersion < 2) {
+        if (oldVersion < 3) {
           // For development: drop and recreate to ensure schema is correct
           await db.execute('DROP TABLE IF EXISTS progress');
           await db.execute('DROP TABLE IF EXISTS quiz_scores');
@@ -53,18 +53,6 @@ class DatabaseHelper {
     ''');
 
     await db.execute('''
-      CREATE TABLE lessons (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        topicId INTEGER NOT NULL,
-        title TEXT NOT NULL,
-        overview TEXT NOT NULL,
-        explanation TEXT NOT NULL,
-        example TEXT NOT NULL,
-        FOREIGN KEY (topicId) REFERENCES topics (id) ON DELETE CASCADE
-      )
-    ''');
-
-    await db.execute('''
       CREATE TABLE practice_items (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         topicId INTEGER NOT NULL,
@@ -85,8 +73,8 @@ class DatabaseHelper {
         example TEXT NOT NULL,
         diagramJson TEXT,
         FOREIGN KEY (topicId) REFERENCES topics (id) ON DELETE CASCADE
-    )
-      ''');
+      )
+    ''');
 
     await db.execute('''
       CREATE TABLE practice_attempts (

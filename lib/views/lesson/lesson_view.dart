@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../models/lesson.dart';
+import '../../widgets/diagrams/lesson_diagram_widget.dart';
 
 class LessonView extends StatefulWidget {
   final Lesson lesson;
@@ -107,6 +108,9 @@ class _LessonViewState extends State<LessonView> {
                       ),
                       const SizedBox(height: 16),
                       _buildFormattedContent(context, slide.content),
+                      if (widget.lesson.diagram != null &&
+                          slide.label == 'Worked Example')
+                        LessonDiagramWidget(diagram: widget.lesson.diagram!),
                     ],
                   ),
                 );

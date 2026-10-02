@@ -62,4 +62,4 @@ class LessonDiagram {
   }
 }
 
-enum DiagramType { algebraTiles, areaModel, coordinatePlane }
+enum DiagramType { algebraTiles, areaModel, coordinatePlane, barModel }

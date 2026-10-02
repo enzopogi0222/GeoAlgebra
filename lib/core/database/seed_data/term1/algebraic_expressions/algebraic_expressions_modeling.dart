@@ -1,12 +1,13 @@
 import '../../seed_helpers.dart';
+import '../../../../../models/lesson.dart';
 
 const algebraicExpressionsModelingLesson = LessonSeedData(
   title: 'Algebraic Expressions',
   overview:
-      'Learn how to translate real-life situations and word phrases into algebraic expressions '
+  'Learn how to translate real-life situations and word phrases into algebraic expressions '
       'using variables, constants, and operations.',
   explanation:
-      'An algebraic expression combines numbers (constants), letters (variables), and operations '
+  'An algebraic expression combines numbers (constants), letters (variables), and operations '
       '(+, −, ×, ÷) to represent an unknown or changing quantity. Unlike an equation, it has no '
       'equals sign — it simply describes a value.\n\n'
       'Key vocabulary:\n'
@@ -29,7 +30,7 @@ const algebraicExpressionsModelingLesson = LessonSeedData(
       'added to a subtraction keyword, the order of the terms is reversed (e.g., "a number '
       'diminished by 2" is x − 2, but "2 diminished by a number" is 2 − x).',
   example:
-      'Example 1 (Jeepney Fare 2024): The minimum jeepney fare is ₱13 for the first 4 kilometers, '
+  'Example 1 (Jeepney Fare 2024): The minimum jeepney fare is ₱13 for the first 4 kilometers, '
       'with a ₱3 increase for each subsequent kilometer. Find the fare for a 7-kilometer trip.\n\n'
       'Step 1: Let x = number of kilometers beyond the first 4.\n\n'
       'Step 2: Write the expression for the fare: 3x + 13.\n\n'
@@ -79,4 +80,15 @@ const algebraicExpressionsModelingLesson = LessonSeedData(
       'Step 3: Substitute n = 4: 500 ÷ 4.\n\n'
       'Step 4: Simplify: 125.\n\n'
       'Answer: 500/n; if n = 4 winners, each share is ₱125.',
+  diagram: const LessonDiagram(
+    type: DiagramType.barModel,
+    data: {
+      'segments': [
+        {'label': 'Base fare: ₱13', 'value': 13},
+        {'label': '3 km × ₱3', 'value': 9},
+      ],
+      'total': 22,
+      'caption': 'Fare = 3x + 13, where x = 3 extra km → 3(3) + 13 = ₱22',
+    },
+  ),
 );
