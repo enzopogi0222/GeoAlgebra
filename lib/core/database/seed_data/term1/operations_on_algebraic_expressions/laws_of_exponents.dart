@@ -1,4 +1,5 @@
 import '../../seed_helpers.dart';
+import 'laws_of_exponents_diagrams.dart';
 
 const lawsOfExponentsLesson = LessonSeedData(
   title: 'Laws of Exponents in Multiplication and Division of Monomials',
@@ -64,4 +65,5 @@ const lawsOfExponentsLesson = LessonSeedData(
       'Step 2: Apply the Quotient Rule to the x\'s: x⁴ ÷ x⁷ = x⁻³, which becomes 1/x³.\n\n'
       'Step 3: Apply the Quotient Rule to the y\'s: y² ÷ y¹ = y¹.\n\n'
       'Answer: -20x⁴y² ÷ (-4x⁷y) = 5y/x³',
+  diagrams: lawsOfExponentsDiagrams,
 );
