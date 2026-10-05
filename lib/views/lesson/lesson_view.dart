@@ -195,18 +195,19 @@ class _LessonViewState extends State<LessonView> {
             width: double.infinity,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: colorScheme.surfaceContainerHigh,
+              color: colorScheme.secondaryContainer.withValues(alpha: 0.35),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: colorScheme.outlineVariant.withValues(alpha: 0.5),
+                color: colorScheme.secondary.withValues(alpha: 0.35),
               ),
             ),
             child: Text(
               trimmed,
               style: TextStyle(
                 fontSize: 15,
+                fontWeight: FontWeight.w600,
                 height: 1.5,
-                color: colorScheme.onSurface,
+                color: colorScheme.onSecondaryContainer,
               ),
             ),
           );
@@ -225,10 +226,10 @@ class _LessonViewState extends State<LessonView> {
             width: double.infinity,
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: colorScheme.primaryContainer.withValues(alpha: 0.2),
+              color: colorScheme.secondaryContainer.withValues(alpha: 0.18),
               borderRadius: BorderRadius.circular(12),
               border: Border.all(
-                color: colorScheme.primary.withValues(alpha: 0.2),
+                color: colorScheme.secondary.withValues(alpha: 0.25),
               ),
             ),
             child: Column(
@@ -239,7 +240,7 @@ class _LessonViewState extends State<LessonView> {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                    color: colorScheme.primary,
+                    color: colorScheme.secondary,
                   ),
                 ),
                 if (rest.isNotEmpty) ...[
@@ -254,6 +255,31 @@ class _LessonViewState extends State<LessonView> {
                   ),
                 ],
               ],
+            ),
+          );
+        }
+
+        // Answer block: "Answer: ..."
+        if (trimmed.startsWith('Answer:')) {
+          return Container(
+            margin: const EdgeInsets.only(bottom: 16),
+            width: double.infinity,
+            padding: const EdgeInsets.all(16),
+            decoration: BoxDecoration(
+              color: colorScheme.secondaryContainer.withValues(alpha: 0.35),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(
+                color: colorScheme.secondary.withValues(alpha: 0.4),
+              ),
+            ),
+            child: Text(
+              trimmed,
+              style: TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+                height: 1.5,
+                color: colorScheme.onSecondaryContainer,
+              ),
             ),
           );
         }
