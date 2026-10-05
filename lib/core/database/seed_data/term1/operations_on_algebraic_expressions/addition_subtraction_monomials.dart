@@ -1,4 +1,5 @@
 import '../../seed_helpers.dart';
+import 'addition_subtraction_monomials_diagrams.dart';
 
 const additionSubtractionMonomialsLesson = LessonSeedData(
   title: 'Addition and Subtraction of Monomials',
@@ -53,4 +54,5 @@ const additionSubtractionMonomialsLesson = LessonSeedData(
       'Step 2: Combine only the similar terms: 3x - 5x = -2x.\n\n'
       'Step 3: Write the dissimilar term as is, since it has nothing to combine with: -2x + 2y.\n\n'
       'Answer: 3x + 2y - 5x = -2x + 2y',
+  diagrams: additionSubtractionMonomialsDiagrams,
 );

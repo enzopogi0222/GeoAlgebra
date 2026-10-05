@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 class AlgebraTile {
   final TileKind kind;
   final bool isPositive;
+  final String? label;
 
-  const AlgebraTile(this.kind, {this.isPositive = true});
+  const AlgebraTile(this.kind, {this.isPositive = true, this.label});
 }
 
 enum TileKind { unit, x, xSquared }
@@ -45,6 +46,7 @@ class AlgebraTilesDiagram extends StatelessWidget {
               ),
               alignment: Alignment.center,
               child: Text(
+                tile.label ??
                 switch (tile.kind) {
                   TileKind.unit => '1',
                   TileKind.x => 'x',

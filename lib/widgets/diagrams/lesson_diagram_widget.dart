@@ -61,7 +61,11 @@ class LessonDiagramWidget extends StatelessWidget {
             orElse: () => TileKind.unit,
           );
           final isPositive = t['isPositive'] as bool? ?? true;
-          return AlgebraTile(kind, isPositive: isPositive);
+          return AlgebraTile(
+            kind,
+            isPositive: isPositive,
+            label: t['label'] as String?,
+          );
         }).toList();
         final caption = data['caption'] as String?;
         return AlgebraTilesDiagram(tiles: tiles, caption: caption);
