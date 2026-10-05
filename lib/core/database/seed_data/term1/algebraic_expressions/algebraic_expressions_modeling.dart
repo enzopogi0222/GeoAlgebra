@@ -1,5 +1,5 @@
 import '../../seed_helpers.dart';
-import '../../../../../models/lesson.dart';
+import 'algebraic_expressions_modeling_diagrams.dart';
 
 const algebraicExpressionsModelingLesson = LessonSeedData(
   title: 'Algebraic Expressions',
@@ -80,15 +80,5 @@ const algebraicExpressionsModelingLesson = LessonSeedData(
       'Step 3: Substitute n = 4: 500 ÷ 4.\n\n'
       'Step 4: Simplify: 125.\n\n'
       'Answer: 500/n; if n = 4 winners, each share is ₱125.',
-  diagram: const LessonDiagram(
-    type: DiagramType.barModel,
-    data: {
-      'segments': [
-        {'label': 'Base fare: ₱13', 'value': 13},
-        {'label': '3 km × ₱3', 'value': 9},
-      ],
-      'total': 22,
-      'caption': 'Fare = 3x + 13, where x = 3 extra km → 3(3) + 13 = ₱22',
-    },
-  ),
+  diagrams: algebraicExpressionsModelingDiagrams,
 );

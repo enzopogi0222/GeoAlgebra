@@ -107,10 +107,7 @@ class _LessonViewState extends State<LessonView> {
                         ],
                       ),
                       const SizedBox(height: 16),
-                      _buildFormattedContent(context, slide.content),
-                      if (widget.lesson.diagram != null &&
-                          slide.label == 'Worked Example')
-                        LessonDiagramWidget(diagram: widget.lesson.diagram!),
+                      ..._buildSlideBody(context, slide),
                     ],
                   ),
                 );
@@ -157,6 +154,29 @@ class _LessonViewState extends State<LessonView> {
         ],
       ),
     );
+  }
+  List<Widget> _buildSlideBody(BuildContext context, _Slide slide) {
+    if (slide.label != 'Worked Example' || widget.lesson.diagrams.isEmpty) {
+      return [_buildFormattedContent(context, slide.content)];
+    }
+
+    final chunks = slide.content
+        .split(RegExp(r'^(?=Example\s+\d+)', multiLine: true))
+        .where((c) => c.trim().isNotEmpty);
+
+    final widgets = <Widget>[];
+    for (final chunk in chunks) {
+      widgets.add(_buildFormattedContent(context, chunk));
+      final match = RegExp(r'^\s*Example\s+(\d+)').firstMatch(chunk);
+      if (match == null) continue;
+      final number = int.parse(match.group(1)!);
+      for (final d in widget.lesson.diagrams) {
+        if (d.exampleNumber == number) {
+          widgets.add(LessonDiagramWidget(diagram: d));
+        }
+      }
+    }
+    return widgets;
   }
 
   Widget _buildFormattedContent(BuildContext context, String content) {

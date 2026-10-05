@@ -8,6 +8,7 @@ class LessonSeedData {
   final String explanation;
   final String example;
   final LessonDiagram? diagram;
+  final List<LessonDiagram> diagrams;
 
   const LessonSeedData({
     required this.title,
@@ -15,7 +16,12 @@ class LessonSeedData {
     required this.explanation,
     required this.example,
     this.diagram,
+    this.diagrams = const [],
   });
+  List<LessonDiagram> get allDiagrams => [
+    if (diagram != null) diagram!,
+    ...diagrams,
+  ];
 }
 
 Future<Topic> topicByTitle(
@@ -45,7 +51,7 @@ Future<void> seedTopicLessons(
       overview: data.overview,
       explanation: data.explanation,
       example: data.example,
-      diagram: data.diagram,
+      diagrams: data.allDiagrams,
     ));
   }
 }

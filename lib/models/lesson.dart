@@ -7,7 +7,7 @@ class Lesson {
   final String overview;
   final String explanation;
   final String example;
-  final LessonDiagram? diagram;
+  final List<LessonDiagram> diagrams;
 
   Lesson({
     this.id,
@@ -16,7 +16,7 @@ class Lesson {
     required this.overview,
     required this.explanation,
     required this.example,
-    this.diagram,
+    this.diagrams = const [],
   });
 
   Map<String, dynamic> toMap() {
@@ -27,7 +27,9 @@ class Lesson {
       'overview': overview,
       'explanation': explanation,
       'example': example,
-      'diagramJson': diagram == null ? null : jsonEncode(diagram!.toJson()),
+      'diagramJson': diagrams.isEmpty
+          ? null
+          : jsonEncode(diagrams.map((d) => d.toJson()).toList()),
     };
   }
 
@@ -39,10 +41,21 @@ class Lesson {
       overview: map['overview'] as String,
       explanation: map['explanation'] as String,
       example: map['example'] as String,
-      diagram: map['diagramJson'] == null
-          ? null
-          : LessonDiagram.fromJson(jsonDecode(map['diagramJson'] as String)),
+      diagrams: _decodeDiagrams(map['diagramJson'] as String?),
     );
+  }
+
+  /// Accepts a JSON list of diagrams, or the older format (a single diagram
+  /// object) so lessons saved before this change still load.
+  static List<LessonDiagram> _decodeDiagrams(String? raw) {
+    if (raw == null) return const [];
+    final decoded = jsonDecode(raw);
+    if (decoded is List) {
+      return decoded
+          .map((e) => LessonDiagram.fromJson(Map<String, dynamic>.from(e as Map)))
+          .toList();
+    }
+    return [LessonDiagram.fromJson(Map<String, dynamic>.from(decoded as Map))];
   }
 }
 
@@ -50,14 +63,26 @@ class LessonDiagram {
   final DiagramType type;
   final Map<String, dynamic> data;
 
-  const LessonDiagram({required this.type, required this.data});
+  /// Which worked example this diagram belongs to (the N in "Example N").
+  final int exampleNumber;
 
-  Map<String, dynamic> toJson() => {'type': type.name, 'data': data};
+  const LessonDiagram({
+    required this.type,
+    required this.data,
+    this.exampleNumber = 1,
+  });
+
+  Map<String, dynamic> toJson() => {
+    'type': type.name,
+    'data': data,
+    'exampleNumber': exampleNumber,
+  };
 
   factory LessonDiagram.fromJson(Map<String, dynamic> json) {
     return LessonDiagram(
       type: DiagramType.values.byName(json['type'] as String),
       data: Map<String, dynamic>.from(json['data'] as Map),
+      exampleNumber: (json['exampleNumber'] as int?) ?? 1,
     );
   }
 }
