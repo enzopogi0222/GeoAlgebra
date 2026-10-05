@@ -1,4 +1,5 @@
 import '../../seed_helpers.dart';
+import 'multiplication_diagrams.dart';
 
 const multiplicationLesson = LessonSeedData(
   title: 'Multiplication of Monomials, Binomials, and Multinomials',
@@ -46,4 +47,5 @@ const multiplicationLesson = LessonSeedData(
       'Step 3: Combine both distributions: x³ + 2x² + 3x + x² + 2x + 3.\n\n'
       'Step 4: Combine like terms: x³ + 3x² + 5x + 3.\n\n'
       'Answer: (x + 1)(x² + 2x + 3) = x³ + 3x² + 5x + 3',
+  diagrams: multiplicationDiagrams,
 );
