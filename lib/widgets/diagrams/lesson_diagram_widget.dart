@@ -53,22 +53,37 @@ class LessonDiagramWidget extends StatelessWidget {
 
     switch (diagram.type) {
       case DiagramType.algebraTiles:
-        final rawTiles = (data['tiles'] as List?) ?? [];
-        final tiles = rawTiles.map((t) {
-          final kindStr = t['kind'] as String? ?? 'unit';
-          final kind = TileKind.values.firstWhere(
-            (k) => k.name == kindStr,
-            orElse: () => TileKind.unit,
+        {
+          // A tile entry may carry 'count' to repeat it, e.g. 4 b-tiles.
+          List<AlgebraTile> parseTiles(List? raw) {
+            return (raw ?? []).expand<AlgebraTile>((t) {
+              final kindStr = t['kind'] as String? ?? 'unit';
+              final kind = TileKind.values.firstWhere(
+                    (k) => k.name == kindStr,
+                orElse: () => TileKind.unit,
+              );
+              final tile = AlgebraTile(
+                kind,
+                isPositive: t['isPositive'] as bool? ?? true,
+                label: t['label'] as String?,
+              );
+              return List.filled((t['count'] as int?) ?? 1, tile);
+            }).toList();
+          }
+
+          final tiles = parseTiles(data['tiles'] as List?);
+          final rows = ((data['rows'] as List?) ?? [])
+              .map((r) => AlgebraTileRow(
+            label: r['label'] as String? ?? '',
+            tiles: parseTiles(r['tiles'] as List?),
+          ))
+              .toList();
+          return AlgebraTilesDiagram(
+            tiles: tiles,
+            rows: rows,
+            caption: data['caption'] as String?,
           );
-          final isPositive = t['isPositive'] as bool? ?? true;
-          return AlgebraTile(
-            kind,
-            isPositive: isPositive,
-            label: t['label'] as String?,
-          );
-        }).toList();
-        final caption = data['caption'] as String?;
-        return AlgebraTilesDiagram(tiles: tiles, caption: caption);
+        }
 
       case DiagramType.areaModel:
         final rowLabels = (data['rowLabels'] as List?)?.cast<String>() ?? [];

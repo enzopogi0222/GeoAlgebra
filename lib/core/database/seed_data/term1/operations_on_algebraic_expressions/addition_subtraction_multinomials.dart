@@ -1,4 +1,5 @@
 import '../../seed_helpers.dart';
+import 'addition_subtraction_multinomials_diagrams.dart';
 
 const additionSubtractionMultinomialsLesson = LessonSeedData(
   title: 'Addition and Subtraction of Binomials and Multinomials',
@@ -48,4 +49,5 @@ const additionSubtractionMultinomialsLesson = LessonSeedData(
       'Step 3: Combine the m-terms: -4m + (-8m) = -12m.\n\n'
       'Step 4: Combine the constant terms: 10 + 6 = 16.\n\n'
       'Answer: (7m² - 4m + 10) - (3m² + 8m - 6) = 4m² - 12m + 16',
+  diagrams: additionSubtractionMultinomialsDiagrams,
 );
