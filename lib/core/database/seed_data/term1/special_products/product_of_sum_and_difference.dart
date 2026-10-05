@@ -1,4 +1,5 @@
 import '../../seed_helpers.dart';
+import 'product_of_sum_and_difference_diagrams.dart';
 
 const productOfSumAndDifferenceLesson = LessonSeedData(
   title: 'Product of Sum and Difference of Two Terms',
@@ -20,4 +21,5 @@ const productOfSumAndDifferenceLesson = LessonSeedData(
       'Example 3 (Negative first term): Multiply (-a² - xy)(-a² + xy).\n\n'
       'Step 1: Square each term: (-a²)² = a⁴; (xy)² = x²y².\n\n'
       'Answer: (-a² - xy)(-a² + xy) = a⁴ - x²y²',
+  diagrams: productOfSumAndDifferenceDiagrams,
 );

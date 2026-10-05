@@ -1,4 +1,5 @@
 import '../../seed_helpers.dart';
+import 'square_of_binomial_diagrams.dart';
 
 const squareOfBinomialLesson = LessonSeedData(
   title: 'Square of a Binomial',
@@ -24,4 +25,5 @@ const squareOfBinomialLesson = LessonSeedData(
       'Step 1: Square each term: (4x)² = 16x²; (3y)² = 9y².\n\n'
       'Step 2: Double their product: 2(4x)(-3y) = -24xy.\n\n'
       'Answer: (4x - 3y)² = 16x² - 24xy + 9y²',
+  diagrams: squareOfBinomialDiagrams,
 );

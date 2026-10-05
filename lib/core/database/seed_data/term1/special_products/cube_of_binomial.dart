@@ -1,4 +1,5 @@
 import '../../seed_helpers.dart';
+import 'cube_of_binomial_diagrams.dart';
 
 const cubeOfBinomialLesson = LessonSeedData(
   title: 'Cube of a Binomial',
@@ -23,4 +24,5 @@ const cubeOfBinomialLesson = LessonSeedData(
       'Example 3 (Two variables): Cube (3x + 4y).\n\n'
       'Step 1: (3x)³ = 27x³, 3(3x)²(4y) = 108x²y, 3(3x)(4y)² = 144xy², (4y)³ = 64y³.\n\n'
       'Answer: (3x + 4y)³ = 27x³ + 108x²y + 144xy² + 64y³',
+  diagrams: cubeOfBinomialDiagrams,
 );

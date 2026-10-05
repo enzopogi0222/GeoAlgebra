@@ -1,4 +1,5 @@
 import '../../seed_helpers.dart';
+import 'square_of_trinomial_diagrams.dart';
 
 const squareOfTrinomialLesson = LessonSeedData(
   title: 'Square of a Trinomial',
@@ -25,4 +26,5 @@ const squareOfTrinomialLesson = LessonSeedData(
       'Step 1: Square each term: (-2p)² = 4p²; (4q)² = 16q²; 5² = 25.\n\n'
       'Step 2: Double each pair: 2(-2p)(4q) = -16pq; 2(-2p)(5) = -20p; 2(4q)(5) = 40q.\n\n'
       'Answer: (-2p + 4q + 5)² = 4p² + 16q² - 16pq - 20p + 40q + 25',
+  diagrams: squareOfTrinomialDiagrams,
 );
